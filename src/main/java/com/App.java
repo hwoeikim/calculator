@@ -1,5 +1,7 @@
 package com;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 record Result(int result) {}
@@ -7,8 +9,7 @@ record Result(int result) {}
 public class App {
     public static void main(String[] args) {
 
-        Result[] results = new Result[10];
-        int count = 0;
+        List<Result> results = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
 
@@ -50,25 +51,39 @@ public class App {
 
             System.out.println("결과: " + result);
 
-            // 결과를 저장
-            // 결과가 10개를 초과하는 경우 가장 먼저 저장된 값 삭제 후 새로운 결과 저장
+            // 결과를 저장(무한)
+            results.add(new Result(result));
 
-            Result newResult = new Result(result);
+            // 가장 먼저 저장된 결과 삭제
+            // (여기선 값이 없을 일은 없지만 연습용 에러방지)
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
 
-            if (count < 10) {
-                results[count] = newResult;
-                count++;
-            } else {
-                for (int i = 1; i < 10; i++) {
-                    results[i - 1] = results[i];
+            String answerRemove = sc.next();
+            if (answerRemove.equals("remove")) {
+                if(!results.isEmpty()) {
+                    results.remove(0);
+                    System.out.println("성공적으로 삭제되었습니다.");
+                } else {
+                    System.out.println("삭제할 기록이 없습니다.");
                 }
-                results[9] = newResult;
             }
 
+            // 저장된 연산 결과 모두 출력
+
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회");
+
+            String answerInquiry = sc.next();
+            if (answerInquiry.equals("inquiry")) {
+                for (Result r : results) {
+                    System.out.println(r.result());
+                }
+            }
+
+            // 종료 여부
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
 
-            String answer = sc.next();
-            if (answer.equals("exit")) {
+            String answerExit = sc.next();
+            if (answerExit.equals("exit")) {
                 System.out.println("계산을 종료합니다.");
                 break;
             }
@@ -106,19 +121,4 @@ public class App {
         }
     }
 }
-
-//        처음부터 int result = switch(operator)로
-//        int result = switch (oprator) {
-//            case '+' -> a + b;
-//            case '-' -> a - b;
-//            case '*' -> a * b;
-//            case '/' -> {
-//                if (b == 0) {
-//                    System.out.println("메세지");
-//                    yield 0;
-//                }
-//                yield a/b;
-//            }
-//            default -> 0;
-//        };
 
