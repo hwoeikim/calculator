@@ -6,57 +6,115 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        Calculator calculator = new Calculator();
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        CircleCalculator circleCalculator = new CircleCalculator();
 
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.println("원하시는 기능을 선택하세요(1: = 사칙연산 / 2: = 원의 넓이 구하기 / 3: 종료) :");
+            int function = readInt(sc);
 
-            System.out.println("첫 번째 숫자를 입력하세요: ");
-            int a = readInt(sc);
+            switch (function) {
+                case 1:
+                    System.out.println("--- 사칙연산 계산기 ---");
 
-            System.out.println("두 번째 숫자를 입력하세요: ");
-            int b = readInt(sc);
+                    while (true) {
 
-            System.out.println("사칙연산 기호(+, -, *, /)를 입력하세요: ");
-            char operator = readOperator(sc);
+                        System.out.println("첫 번째 숫자를 입력하세요: ");
+                        int a = readInt(sc);
 
-            // 입력받은 값 연산 수행 역할은 Calculator 클래스가 담당
+                        System.out.println("두 번째 숫자를 입력하세요: ");
+                        int b = readInt(sc);
 
-            try {
-                int result = calculator.calculate(a, b, operator);
-                System.out.println("결과: " + result);
-            } catch (CalculatorException e) {
-                System.out.println("Error: " + e.getMessage());
-                continue;
+                        System.out.println("사칙연산 기호(+, -, *, /)를 입력하세요: ");
+                        char operator = readOperator(sc);
+
+                        // 입력받은 값 연산 수행 역할은 Calculator 클래스가 담당
+
+                        try {
+                            int result = arithmeticCalculator.calculate(a, b, operator);
+                            System.out.println("결과: " + result);
+                        } catch (CalculatorException e) {
+                            System.out.println("Error: " + e.getMessage());
+                            continue;
+                        }
+
+
+                        // 가장 먼저 저장된 결과 삭제
+                        System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+
+                        String answerRemove = sc.next();
+                        if (answerRemove.equals("remove")) {
+                            arithmeticCalculator.removeResult();
+                        }
+
+                        // 저장된 연산 결과 모두 출력
+                        System.out.println("저장된 연산 결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+
+                        String answerInquiry = sc.next();
+                        if (answerInquiry.equals("inquiry")) {
+                            arithmeticCalculator.inquiryResults();
+                        }
+
+                        // 종료 여부
+                        System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+
+                        String answerExit = sc.next();
+                        if (answerExit.equals("exit")) {
+                            System.out.println("계산을 종료합니다.");
+                            break;
+                        }
+                    }
+                    break;
+
+
+                case 2:
+                    System.out.println("--- 원의 넓이 계산 모드 ---");
+
+                    while (true) {
+
+                        // 원의 넓이 구하기
+                        System.out.println("원의 반지름을 입력해주세요: ");
+                        int radius = readInt(sc);
+
+                        try {
+                            double area = circleCalculator.calculateCircleArea(radius);
+                            System.out.println("원의 넓이: " + area);
+                        } catch (CalculatorException e) {
+                            System.out.println("Error: " + e.getMessage());
+                            continue;
+                        }
+
+                        // 저장된 원의 넓이 값들 바로 전체 조회
+
+                       circleCalculator.inquiryResults();
+
+                        // 종료 여부
+                        System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+
+                        String answerExit = sc.next();
+                        if (answerExit.equals("exit")) {
+                            System.out.println("계산을 종료합니다.");
+                            break;
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("프로그램을 종료합니다.");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("올바른 번호(1, 2, 3)를 입력해 주세요.");
+                    break;
+
             }
 
-
-            // 가장 먼저 저장된 결과 삭제
-            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
-
-            String answerRemove = sc.next();
-            if (answerRemove.equals("remove")) {
-                calculator.removeResult();
-            }
-
-            // 저장된 연산 결과 모두 출력
-            System.out.println("저장된 연산 결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
-
-            String answerInquiry = sc.next();
-            if (answerInquiry.equals("inquiry")) {
-                calculator.inquiryResults();
-            }
-
-            // 종료 여부
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-
-            String answerExit = sc.next();
-            if (answerExit.equals("exit")) {
-                System.out.println("계산을 종료합니다.");
-                break;
-            }
         }
+
+
     }
 
 
@@ -90,4 +148,3 @@ public class App {
         }
     }
 }
-

@@ -3,52 +3,15 @@ package com;
 import java.util.ArrayList;
 import java.util.List;
 
-// 구성을 꺼내는 메서드 자동 생성
-record Result(int result) {}
+// 정수, 소수 가능
+record Result(double result) {}
 
-// 컬렉션: List, ArrayList, Set, Map 등 데이터 묶음 형식의 자료구조
-// 필드: 인스턴스(객체)가 가진 데이터(상태)
-// 기본 생성자: 매개변수가 없는 생성자 형태
+public abstract class Calculator {
 
-public class Calculator {
+    protected List<Result> results;
 
-    // 컬렉션 타입 필드 선언 (참조 변수 정의)
-    private List<Result> results;
-
-    // 생성자를 이용한 Calculator 인스턴스 생성시 필드 초기화
     public Calculator () {
         this.results = new ArrayList<>();
-    }
-
-    public int calculate(int a, int b, char operator) {
-
-        if (a < 0 || b < 0) {
-            throw new CalculatorException("0 이상의 양의 정수를 입력해야 합니다.");
-        }
-        if (operator == '/' && b == 0) {
-            throw new CalculatorException("나눗셈에서 두번째 숫자(분모)는 0일 수 없습니다.");
-        }
-
-
-        int calculatorResult = 0;
-
-        switch (operator) {
-            case '+':
-                calculatorResult = a + b;
-                break;
-            case '-':
-                calculatorResult = a - b;
-                break;
-            case '*':
-                calculatorResult = a * b;
-                break;
-            case '/':
-                calculatorResult = a / b;
-                break;
-        }
-
-        results.add(new Result(calculatorResult));
-        return calculatorResult;
     }
 
     public void removeResult() {
@@ -59,7 +22,6 @@ public class Calculator {
             System.out.println("삭제할 기록이 없습니다.");
         }
     }
-
 
     public List<Result> getResults() {
         return this.results;
@@ -79,7 +41,5 @@ public class Calculator {
         }
 
     }
-
-
 
 }
