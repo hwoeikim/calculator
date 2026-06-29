@@ -6,14 +6,16 @@ import java.util.List;
 // 구성을 꺼내는 메서드 자동 생성
 record Result(int result) {}
 
+// 컬렉션: List, ArrayList, Set, Map 등 데이터 묶음 형식의 자료구조
+// 필드: 인스턴스(객체)가 가진 데이터(상태)
+// 기본 생성자: 매개변수가 없는 생성자 형태
+
 public class Calculator {
+
     // 컬렉션 타입 필드 선언 (참조 변수 정의)
-    // 컬렉션: List, ArrayList, Set, Map 등 데이터 묶음 형식의 자료구조
-    // 필드: 인스턴스(객체)가 가진 데이터(상태)
     private List<Result> results;
 
-    // Calculator 인스턴스 생성시 필드 초기화
-    // 기본 생성자: 매개변수가 없는 생성자 형태
+    // 생성자를 이용한 Calculator 인스턴스 생성시 필드 초기화
     public Calculator () {
         this.results = new ArrayList<>();
     }
