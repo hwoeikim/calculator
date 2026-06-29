@@ -2,8 +2,13 @@ package com;
 
 import java.util.Scanner;
 
+record Result(int result) {}
+
 public class App {
     public static void main(String[] args) {
+
+        Result[] results = new Result[10];
+        int count = 0;
 
         Scanner sc = new Scanner(System.in);
 
@@ -44,6 +49,21 @@ public class App {
             }
 
             System.out.println("결과: " + result);
+
+            // 결과를 저장
+            // 결과가 10개를 초과하는 경우 가장 먼저 저장된 값 삭제 후 새로운 결과 저장
+
+            Result newResult = new Result(result);
+
+            if (count < 10) {
+                results[count] = newResult;
+                count++;
+            } else {
+                for (int i = 1; i < 10; i++) {
+                    results[i - 1] = results[i];
+                }
+                results[9] = newResult;
+            }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
 
