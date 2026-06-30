@@ -26,6 +26,6 @@ public enum OperatorType {
                 return type;
             }
         }
-        throw new CalculatorException("올바른 연산 기호(+, -, *, /, %)가 아닙니다.")
+        throw new CalculatorException("올바른 연산 기호(+, -, *, /, %)가 아닙니다.");
     }
 }
