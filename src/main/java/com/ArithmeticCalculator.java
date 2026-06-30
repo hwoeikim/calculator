@@ -20,34 +20,34 @@ public class ArithmeticCalculator extends Calculator {
         this.modOperator = new ModOperator();
     }
 
-
-    public int calculate(int a, int b, char operator) {
+    public int calculate (int a, int b, char operator) {
 
         int result = 0;
 
-        switch (operator) {
-            case '+':
+        // 입력받은 값 enum 상수 변환
+        OperatorType operatorType = OperatorType.from(operator);
+
+        // enum 상수 기준 작동
+        switch (operatorType) {
+            case ADD:
                 result = addOperator.operate(a, b);
                 break;
 
-            case '-':
+            case SUBTRACT:
                 result = subtractOperator.operate(a, b);
                 break;
 
-            case '*':
+            case MULTIPLY:
                 result = multiplyOperator.operate(a, b);
                 break;
 
-            case '/':
+            case DIVIDE:
                 result = divideOperator.operate(a, b);
                 break;
 
-            case '%':
+            case MOD:
                 result = modOperator.operate(a, b);
                 break;
-
-            default:
-                throw new CalculatorException("올바른 연산 기호(+, -, *, /, %)를 입력해주세요");
         }
 
         results.add(new Result(result));
