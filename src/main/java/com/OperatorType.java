@@ -16,13 +16,13 @@ public enum OperatorType {
         this.operator = operator;
     }
 
-    public char getSymbol() {
+    public char getOperator() {
         return this.operator;
     }
 
     public static OperatorType from(char operator) {
         for (OperatorType type : OperatorType.values()) {
-            if (type.getSymbol() == operator) {
+            if (type.getOperator() == operator) {
                 return type;
             }
         }

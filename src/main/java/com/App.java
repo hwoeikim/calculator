@@ -50,12 +50,19 @@ public class App {
                         }
 
                         // 저장된 연산 결과 모두 출력
-                        System.out.println("저장된 연산 결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+                        System.out.println("저장된 연산 결과를 모두 조회하시겠습니까? (inquiry 입력 시 조회)");
 
                         String answerInquiry = sc.next();
                         if (answerInquiry.equals("inquiry")) {
                             arithmeticCalculator.inquiryResults();
                         }
+
+                        // 저장된 결과 중 입력값보다 큰 값 출력
+                        System.out.println("저장된 연산 결과 중 입력값보다 큰 값 출력: ");
+
+                        double targetNumber = readDouble(sc);
+                        arithmeticCalculator.printBiggerResults(targetNumber);
+
 
                         // 종료 여부
                         System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
@@ -155,7 +162,7 @@ public class App {
                 continue;
             }
 
-            double input = sc.next();
+            double input = sc.nextDouble();
             if (input < 0) {
                 System.out.println("0 이상의 숫자를 입력해주세요: ");
                 continue;

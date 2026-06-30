@@ -53,4 +53,14 @@ public class ArithmeticCalculator extends Calculator {
         results.add(new Result(result));
         return result;
     }
+
+    public void printBiggerResults (double targetNumber) {
+
+        System.out.println("--- " + targetNumber + "보다 큰 연산 결과 목록 ---");
+
+        results.stream()
+                .filter(r -> targetNumber < r.result())
+                .forEach(r -> System.out.println(r.result()));
+
+    }
 }
