@@ -12,7 +12,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.println("원하시는 기능을 선택하세요(1: = 사칙연산 / 2: = 원의 넓이 구하기 / 3: 종료): ");
+            System.out.println("원하시는 기능을 선택하세요(1: = 사칙연산 &  / 2: = 원의 넓이 구하기 / 3: 종료): ");
             int function = readInt(sc);
 
             switch (function) {
@@ -27,10 +27,10 @@ public class App {
                         System.out.println("두 번째 숫자를 입력하세요: ");
                         int b = readInt(sc);
 
-                        System.out.println("사칙연산 기호(+, -, *, /)를 입력하세요: ");
+                        System.out.println("연산 기호(+, -, *, /, %)를 입력하세요: ");
                         char operator = readOperator(sc);
 
-                        // 입력받은 값 연산 수행 역할은 Calculator 클래스가 담당
+                        // 입력받은 값 연산 수행
 
                         try {
                             int result = arithmeticCalculator.calculate(a, b, operator);
@@ -122,11 +122,11 @@ public class App {
             String input = sc.next();
             char o = input.charAt(0);
 
-            if (o=='+' || o=='-' || o=='*' || o=='/') {
+            if (o=='+' || o=='-' || o=='*' || o=='/' || o=='%') {
                 return o;
             }
 
-            System.out.println("올바른 사칙연산 기호(+, -, *, /)를 입력해주세요: ");
+            System.out.println("올바른 사칙연산 기호(+, -, *, /, %)를 입력해주세요: ");
         }
     }
 
@@ -140,7 +140,7 @@ public class App {
 
             int input = sc.nextInt();
             if (input < 0) {
-                System.out.print("0 이상의 양의 정수를 입력해주세요: ");
+                System.out.println("0 이상의 양의 정수를 입력해주세요: ");
                 continue;
             }
             return input;

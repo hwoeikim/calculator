@@ -3,13 +3,16 @@ package com;
 import java.util.ArrayList;
 import java.util.List;
 
-// 정수, 소수 가능
+// 데이터를 저장하는 목적의 객체
+// 구성을 꺼내는 getter 메서드(result())
 record Result(double result) {}
 
 public abstract class Calculator {
 
+    // 필드 -> 결과 저장 리스트 (하위 클래스 접근 가능)
     protected List<Result> results;
 
+    // 생성자 -> Calculator 객체가 생성될 때 결과를 저장할 ArrayList 생성
     public Calculator () {
         this.results = new ArrayList<>();
     }
