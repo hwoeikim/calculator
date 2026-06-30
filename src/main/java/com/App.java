@@ -12,7 +12,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.println("원하시는 기능을 선택하세요(1: = 사칙연산 / 2: = 원의 넓이 구하기 / 3: 종료) :");
+            System.out.println("원하시는 기능을 선택하세요(1: = 사칙연산 / 2: = 원의 넓이 구하기 / 3: 종료): ");
             int function = readInt(sc);
 
             switch (function) {
@@ -79,8 +79,7 @@ public class App {
                         int radius = readInt(sc);
 
                         try {
-                            double area = circleCalculator.calculateCircleArea(radius);
-                            System.out.println("원의 넓이: " + area);
+                            System.out.println("원의 넓이: " + circleCalculator.calculateCircleArea(radius));
                         } catch (CalculatorException e) {
                             System.out.println("Error: " + e.getMessage());
                             continue;

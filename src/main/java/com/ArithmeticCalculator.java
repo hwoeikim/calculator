@@ -2,40 +2,46 @@ package com;
 
 public class ArithmeticCalculator extends Calculator {
 
+    private final AddOperator addOperator;
+    private final SubtractOperator subtractOperator;
+    private final MultiplyOperator multiplyOperator;
+    private final DivideOperator divideOperator;
+
     public ArithmeticCalculator () {
         super();
+        this.addOperator = new AddOperator();
+        this.subtractOperator = new SubtractOperator();
+        this.multiplyOperator = new MultiplyOperator();
+        this.divideOperator = new DivideOperator();
     }
+
 
     public int calculate(int a, int b, char operator) {
 
-        if (a < 0 || b < 0) {
-            throw new CalculatorException("0 이상의 양의 정수를 입력해야 합니다.");
-        }
-        if (operator == '/' && b == 0) {
-            throw new CalculatorException("나눗셈에서 두번째 숫자(분모)는 0일 수 없습니다.");
-        }
-
-
-        int calculatorResult = 0;
+        int result = 0;
 
         switch (operator) {
             case '+':
-                calculatorResult = a + b;
+                result = addOperator.operate(a, b);
                 break;
+
             case '-':
-                calculatorResult = a - b;
+                result = subtractOperator.operate(a, b);
                 break;
+
             case '*':
-                calculatorResult = a * b;
+                result = multiplyOperator.operate(a, b);
                 break;
+
             case '/':
-                calculatorResult = a / b;
+                result = divideOperator.operate(a, b);
                 break;
+
+            default:
+                throw new CalculatorException("올바른 사칙연산 기호(+, -, *, /)를 입력해주세요");
         }
 
-        results.add(new Result(calculatorResult));
-        return calculatorResult;
+        results.add(new Result(result));
+        return result;
     }
-
-
 }
