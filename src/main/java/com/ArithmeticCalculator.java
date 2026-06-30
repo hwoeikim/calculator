@@ -20,9 +20,9 @@ public class ArithmeticCalculator extends Calculator {
         this.modOperator = new ModOperator();
     }
 
-    public int calculate (int a, int b, char operator) {
+    public double calculate (double a, double b, char operator) {
 
-        int result = 0;
+        double result = 0;
 
         // 입력받은 값 enum 상수 변환
         OperatorType operatorType = OperatorType.from(operator);

@@ -22,10 +22,10 @@ public class App {
                     while (true) {
 
                         System.out.println("첫 번째 숫자를 입력하세요: ");
-                        int a = readInt(sc);
+                        double a = readDouble(sc);
 
                         System.out.println("두 번째 숫자를 입력하세요: ");
-                        int b = readInt(sc);
+                        double b = readDouble(sc);
 
                         System.out.println("연산 기호(+, -, *, /, %)를 입력하세요: ");
                         char operator = readOperator(sc);
@@ -33,7 +33,7 @@ public class App {
                         // 입력받은 값 연산 수행
 
                         try {
-                            int result = arithmeticCalculator.calculate(a, b, operator);
+                            double result = arithmeticCalculator.calculate(a, b, operator);
                             System.out.println("결과: " + result);
                         } catch (CalculatorException e) {
                             System.out.println("Error: " + e.getMessage());
@@ -145,5 +145,23 @@ public class App {
             }
             return input;
         }
+    }
+
+    private static double readDouble(Scanner sc) {
+        while (true) {
+            if(!sc.hasNextDouble()) {
+                System.out.println("0 이상의 숫자를 입력해주세요: ");
+                sc.next();
+                continue;
+            }
+
+            double input = sc.next();
+            if (input < 0) {
+                System.out.println("0 이상의 숫자를 입력해주세요: ");
+                continue;
+            }
+            return input;
+        }
+
     }
 }
